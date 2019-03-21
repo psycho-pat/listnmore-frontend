@@ -1,21 +1,16 @@
 <template>
   <div id="app">
     <HelloWorld />
-    <p></p>
-    <p />
-    <ArtistList />
   </div>
 </template>
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
-import ArtistList from "./components/ArtistList.vue";
 
 export default {
   name: "app",
   components: {
-    HelloWorld,
-    ArtistList
+    HelloWorld
   }
 };
 </script>
