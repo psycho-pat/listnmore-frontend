@@ -1,6 +1,8 @@
 <template>
   <div id="test">
     <h2>This is a band</h2>
+    <input v-model="user_name" placeholder="username" />
+    <a :href="createCreds"> <button>Create Credentials</button> </a>
     <button @click="getArtists">Get http</button>
     <button @click="postArtists">Post http</button>
     <ArtistList v-bind:artistList="artistList"></ArtistList>
@@ -16,7 +18,8 @@ export default {
   name: "HelloWorld",
   data() {
     return {
-      artistList: []
+      artistList: [],
+      user_name: ""
     };
   },
   components: { ArtistList },
@@ -42,6 +45,13 @@ export default {
       console.log(data);
       //data = Vue.http.get('http://127.0.0.1:5000/artists');
       //alert(data);
+    }
+  },
+  computed: {
+    createCreds() {
+      console.log("foo");
+      //const user_name = "psycho.pat";
+      return `http://127.0.0.1:5000/create_creds?user_name=${this.user_name}`;
     }
   }
 };
