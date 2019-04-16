@@ -2,6 +2,7 @@
   <div id="test">
     <h2>This is a band</h2>
     <input v-model="user_name" placeholder="username" />
+    <input v-model="playlist_id" placeholder="playlist_id" />
     <a :href="createCreds"> <button>Create Credentials</button> </a>
     <button @click="getArtists">Get http</button>
     <button @click="postArtists">Post http</button>
@@ -19,7 +20,8 @@ export default {
   data() {
     return {
       artistList: [],
-      user_name: ""
+      user_name: "",
+      playlist_id: ""
     };
   },
   components: { ArtistList },
@@ -51,7 +53,9 @@ export default {
     createCreds() {
       console.log("foo");
       //const user_name = "psycho.pat";
-      return `http://127.0.0.1:5000/create_creds?user_name=${this.user_name}`;
+      return `http://127.0.0.1:5000/create_creds?user_name=${
+        this.user_name
+      }&playlist_id=${this.playlist_id}`;
     }
   }
 };
