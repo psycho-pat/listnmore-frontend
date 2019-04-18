@@ -2,10 +2,10 @@
   <div id="test">
     <h2>This is a band</h2>
     <input v-model="user_name" placeholder="username" />
-    <input v-model="playlist_id" placeholder="playlist_id" />
     <a :href="createCreds"> <button>Create Credentials</button> </a>
-    <button @click="getArtists">Get http</button>
-    <button @click="postArtists">Post http</button>
+    <button @click="getArtists">Get top artists</button>
+    <button @click="postArtists">Post selection</button>
+    <button @click="refillPlaylist">Refill playlist</button>
     <ArtistList v-bind:artistList="artistList"></ArtistList>
   </div>
 </template>
@@ -22,8 +22,7 @@ export default {
   data() {
     return {
       artistList: [],
-      user_name: "",
-      playlist_id: ""
+      user_name: ""
     };
   },
   components: { ArtistList },
@@ -48,16 +47,18 @@ export default {
       //const res = await data.json();
       console.log(data);
       //data = Vue.http.get('http://127.0.0.1:5000/artists');
-      //alert(data);
+      alert("Music matrix created - ready to generate songs");
+    },
+    async refillPlaylist() {
+      const data = await fetch(`${BACKEND_URL}/refillPlaylist`);
+      console.log(await data);
     }
   },
   computed: {
     createCreds() {
       console.log("foo");
       //const user_name = "psycho.pat";
-      return `${BACKEND_URL}/create_creds?user_name=${
-        this.user_name
-      }&playlist_id=${this.playlist_id}`;
+      return `${BACKEND_URL}/create_creds?user_name=${this.user_name}`;
     }
   }
 };
