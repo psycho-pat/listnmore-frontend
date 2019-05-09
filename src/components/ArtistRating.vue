@@ -1,10 +1,14 @@
 <template>
   <li>
-    {{ artist }}
+    {{ value.artist }}
     <button v-on:click="$emit('remove')">Remove</button>
+    <input type="checkbox" id="banned" v-model="value.banned" />
+    <label for="banned">ban</label>
+    <input type="checkbox" id="isolated" v-model="value.isolated" />
+    <label for="isolated">isolate</label>
     <star-rating
       @rating-selected="setRating"
-      :rating="rating"
+      :rating="value.rating"
       :show-rating="false"
     ></star-rating>
   </li>
@@ -14,8 +18,11 @@
 export default {
   name: "ArtistRating",
   props: {
-    artist: String,
-    rating: Number
+    value: Object
+    //artist: String,
+    //rating: Number,
+    //banned: Boolean,
+    //isolated: Boolean
   },
   methods: {
     setRating(rating) {

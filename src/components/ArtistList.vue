@@ -13,9 +13,10 @@
       <ArtistRating
         v-for="(artistObj, index) in artistList"
         v-bind:key="index"
-        v-bind="artistObj"
+        v-model="artistList[index]"
         v-on:remove="artistList.splice(index, 1)"
         v-on:set-rating="rating => setRating(rating, artistObj)"
+        v-on:input="setRating(1, artistObj)"
       ></ArtistRating>
     </ul>
   </div>
@@ -45,7 +46,9 @@ export default {
     addNewArtistObj() {
       this.artistList.push({
         artist: this.newArtistObj,
-        rating: 1
+        rating: 1,
+        banned: false,
+        isolated: false
       });
       this.newArtistObj = "";
     }
