@@ -45,10 +45,9 @@ export default {
     },
     addNewArtistObj() {
       this.artistList.push({
-        artist: this.newArtistObj,
+        name: this.newArtistObj,
         rating: 1,
-        banned: false,
-        isolated: false
+        type: "seed"
       });
       this.newArtistObj = "";
     }

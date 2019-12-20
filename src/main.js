@@ -1,12 +1,13 @@
-import Vue from "vue";
-import StarRating from "vue-star-rating";
-import App from "./App.vue";
+import Vue from "vue"
+import StarRating from "vue-star-rating"
+import App from "./App.vue"
+import router from './router'
 
-//Vue.use(require('vue-resource'));
+
 Vue.component("star-rating", StarRating);
-
-Vue.config.productionTip = false;
+Vue.config.productionTip = false
 
 new Vue({
+  router,
   render: h => h(App)
-}).$mount("#app");
+}).$mount('#app')
