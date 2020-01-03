@@ -1,10 +1,12 @@
 <template>
   <div id="ListCreator">
-    <h1>List Creator - select seed artists for your playlis:</h1>
-    <button @click="getTopArtists">GET top artists</button>
-    <button @click="getPlaylistArtists">GET playlist artists</button>
-    <button @click="clearSWL">clear seed-weight-list</button>
-    <button @click="postSWL">POST seed-weight-list</button>
+    <h1>List Creator - select seed artists for your playlis</h1>
+    <div id="ButtonGroup">
+      <button @click="getTopArtists">Add top artists</button>
+      <button @click="getPlaylistArtists">Add playlist artists</button>
+      <button @click="clearSWL">Clear seed-weight-list</button>
+      <button @click="postSWL">Post artists</button>
+    </div>
     <ArtistList v-bind:artistList="artistList"></ArtistList>
   </div>
 </template>
@@ -107,5 +109,30 @@ li {
 }
 a {
   color: #42b983;
+}
+#ButtonGroup{
+
+  display: inline-flex;
+  flex-wrap: wrap;
+  margin-bottom: 1em;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+#ButtonGroup > button {
+  width: 7em;
+  height: 5em;
+  background-color: black;
+  color: white;
+  border-radius: 15px;
+  border:none;
+  margin: 0.25em 0.25em;
+  /*box-shadow: 2px 5px#666*/
+}
+button:hover {
+  background-color:#333;
+}
+#ListCreator > h1{
+  text-align: center;
 }
 </style>

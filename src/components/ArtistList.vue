@@ -1,11 +1,10 @@
 <template>
   <div id="ArtistList">
-    <form v-on:submit.prevent="addNewArtistObj">
-      <label for="new-artist">Add an artist </label>
+    <form  id="NewArtistForm" v-on:submit.prevent="addNewArtistObj">
       <input
         v-model="newArtistObj"
         id="new-artist"
-        placeholder="New artist to add"
+        placeholder="New artist"
       />
       <button>Add</button>
     </form>
@@ -54,3 +53,62 @@ export default {
   }
 };
 </script>
+<style>
+  #NewArtistForm {
+    display: inline-flex;
+    align-items: center;
+    width:100%;
+    justify-content: center;
+  }
+  #NewArtistForm > button {
+    margin-top: 0;
+    margin-left:0.5em;
+    border: none;
+    background-color: black;
+    color: white;
+    border-radius: 25px;
+    height: 2em;
+  }
+  #ArtistList > ul{
+    display:inline-flex;
+    flex-direction: column;
+    list-style-type:none;
+    width:fit-content;
+    padding:0;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  #ArtistList ul > li {
+    background-color: black;
+    border-radius:25px;
+    color: white;
+    text-align: center;
+    display:grid;
+    grid-template-columns: 16em 5em;
+    margin-bottom: 0.5em;
+    padding-left:0.5em;
+    padding-right:0.5em;
+    width:fit-content;
+  }
+  #ArtistList ul > li > p {
+    margin:0;
+    align-self: center;
+    font-size: 2em;
+    }
+  #ArtistList ul > li > button {
+    display: block;
+    align-self: center;
+    margin: 0;
+    height: 2em;
+    color: white;
+    background-color: black;
+    border-radius: 25px;
+    border-color: white;
+    border-style: solid;
+    width:fit-content;
+  }
+  #ArtistList ul > li > button:hover {
+  background-color: #333;
+  }
+  </style>

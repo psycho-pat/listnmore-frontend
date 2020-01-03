@@ -1,9 +1,12 @@
 <template>
-    <div class="account">
-        <h1>Username: {{ name }}</h1>
+    <div class="account" id="AccountDiv">
+        <div id="account_username">
+            <h1>Username: {{ name }}</h1>
+            <button @click="logoutUser">Logout</button>
+        </div>
         <h1>Spotify access: {{ spotify_message }}</h1>
         <div id="spotify">
-            <button @click="authSpotify">Authorize Spotify Access</button>
+            <a href="http://127.0.0.1:5000/api/sptfy/authorize"><button>Authorize Spotify Access</button></a>
         </div>
         <h1>User Playlists:</h1>
         <div id="playlists">
@@ -30,15 +33,24 @@
             }
         },
         methods : {
-            async authSpotify() {
-                const data = await fetch(`${BACKEND_URL}/api/sptfy/authorize`);
+            async logoutUser() {
+                const data = await fetch(`${BACKEND_URL}/api/user/logout`,{
+                    credentials:"include"
+                });
                 await data;
+                this.name = "username";
+                this.spotify_status = false;
+                this.spotify_message = "not authorized";
                 this.getUserInfo();
                 //alert("Account has been created");
             },
             async getUserInfo() {
-                const data = await fetch(`${BACKEND_URL}/api/user/get-info`);
+                //console.log("getUserInfo");
+                const data = await fetch(`${BACKEND_URL}/api/user/get-info`,{
+                    credentials:"include"
+                });
                 let json = await data.json();
+                //console.log(JSON.stringify(json));
                 this.name = json.name;
                 this.spotify_status = json.spotify_status;
                 this.user_playlists = json.user_playlists;
@@ -48,6 +60,7 @@
                 else{
                     this.spotify_message = "not authorized";
                 }
+                //console.log(this.name);
             },
             async renewPlaylist(index) {
                 const data = await fetch(`${BACKEND_URL}/api/list/renewPlaylist?index=` + index);
@@ -61,3 +74,24 @@
         }
     }
 </script>
+<style>
+
+#account_username {
+    display: inline-flex;
+    align-items: center;
+}
+#account_username > button {
+    margin-left: 1em;
+}
+    #AccountDiv button {
+        margin-top:0.5em;
+        border: none;
+        background-color: black;
+        color: white;
+        border-radius: 25px;
+        height: 2em;
+    }
+    button:hover {
+  background-color: #333;
+    }
+</style>

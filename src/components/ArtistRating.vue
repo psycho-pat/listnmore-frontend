@@ -1,6 +1,6 @@
 <template>
   <li>
-    {{ value.name }}
+    <p>{{ value.name }}</p>
     <form>
       <label>Type:
         <select v-model="value.type" id="type">
@@ -32,3 +32,5 @@ export default {
   }
 };
 </script>
+<style>
+</style>

@@ -1,38 +1,29 @@
 <template>
     <div class="login">
-        <h1>Login user:</h1>
-        <form>
-            <label for="name"><b>Username</b></label>
-            <input type="text" v-model="name" placeholder="Enter Username" required>
-            <label for="psw"><b>Password</b></label>
-            <input type="password" v-model="password" placeholder="Enter Password" required>
-            <button @click="handleSubmit">Login</button>
+        <h1>Login</h1>
+        <form id="login_form" action="http://127.0.0.1:5000/api/user/login" method="POST">
+            <input type="text" name="name" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
         </form>
     </div>
 </template>
 <script>
-    const BACKEND_URL = "http://127.0.0.1:5000";
-    export default {
-        props : ["nextUrl"],
-        data(){
-            return {
-                name : "",
-                password : "",
-            }
-        },
-        methods : {
-            async handleSubmit() {
-                //e.preventDefault()
-                var formData = new FormData();
-                formData.append("name", this.name);
-                formData.append("password", this.password);
-                const data = await fetch(`${BACKEND_URL}/login`, {
-                    method: "POST",
-                    body: formData
-                });
-                await data;
-                //alert("Account has been created");
-            }
-        }
-    }
 </script>
+<style>
+    #login_form{
+        display:inline-flex;
+        flex-direction: column;
+    }
+        #login_form > button {
+        margin-top:0.5em;
+        border: none;
+        background-color: black;
+        color: white;
+        border-radius: 25px;
+        height: 2em;
+    }
+    #login_form > button:hover {
+  background-color: #333;
+}
+</style>

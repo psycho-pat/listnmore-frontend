@@ -1,7 +1,7 @@
 <template>
   <div id="ListOptions">
     <h1>List Options</h1>
-    <form>
+    <form id="ListOptionForm">
         Song Count (10 - 200):
         <input type="number" v-model="songCount" min=10 max=200>
         <br />
@@ -11,8 +11,9 @@
         Renew Time (hh:mm):
         <input type="time" v-model="renewTime">
         <br />
+        <button @click="postOptions">Submit</button>
     </form>
-    <button @click="postOptions">POST list options</button>
+    
   </div>
 </template>
 <script>
@@ -50,3 +51,20 @@ const BACKEND_URL = "http://127.0.0.1:5000";
     }
   }
 </script>
+<style>
+#ListOptionForm {
+  display: inline-flex;
+  flex-direction: column;
+}
+    #ListOptionForm > button {
+        margin-top:0.5em;
+        border: none;
+        background-color: black;
+        color: white;
+        border-radius: 25px;
+        height: 2em;
+    }
+    #ListOptionForm > button:hover {
+  background-color: #333;
+    }
+</style>
