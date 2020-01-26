@@ -1,38 +1,60 @@
 <template>
   <div id="app">
-    <nav :class="{'item-visible':itemVisible}">
+    <nav :class="{'list-visible':itemVisible}">
       <router-link to="/"><Logo size="2em"></Logo></router-link>
-      <ul id="navbarUL" :class="{'item-visible':itemVisible}">
+      <ul id="navbarUL" :class="{'list-visible':itemVisible}">
         <li id="homeRoute"><router-link to="/">Home</router-link></li>
-        <li><router-link to="/register">Register</router-link></li>
-        <li><router-link to="/login">Login</router-link></li>
-        <li><router-link to="/account">Account</router-link></li>
-        <li><router-link to="/ListCreator">ListCreator</router-link></li>
-        <li><router-link to="/ListOptions">ListOptions</router-link></li>
+        <li :class="{'item-visible':userAuth}"><router-link to="/register">Register</router-link></li>
+        <li :class="{'item-visible':userAuth}"><router-link to="/login">Login</router-link></li>
+        <li :class="{'item-visible':!userAuth}"><router-link to="/account">Account</router-link></li>
+        <li :class="{'item-visible':!userAuth}"><router-link to="/ListCreator">ListCreator</router-link></li>
+        <li :class="{'item-visible':!userAuth}"><router-link to="/ListOptions">ListOptions</router-link></li>
       </ul>
       <button @click="hamburgerClick"><img id="hamburger" src="./assets/Hamburger_icon.svg" /></button>
     </nav>
     <main>
       <router-view></router-view>
     </main>
+    <img id="backgroundLogo" src="./assets/logo3.svg">
   </div>
-</template>-
+</template>
 
 <script>
 import Logo from '@/components/Logo.vue'
 
 document.title = "Listnnmore";
+const BACKEND_URL = "http://127.0.0.1:5000";
 export default {
   name: 'app',
   components: {
     Logo
   },
   data() {
-    return {itemVisible:false}
+    return {
+      itemVisible:false,
+      userAuth:false
+      }
   },
   methods : {
     hamburgerClick(){
       this.itemVisible = !this.itemVisible;
+    },
+    async getUserAuth() {
+      //console.log("getUserInfo");
+      const data = await fetch(`${BACKEND_URL}/api/user/check-auth`,{
+          credentials:"include"
+      });
+      let json = await data.json();
+      this.userAuth = Boolean(json.user_auth);
+      //console.log(this.name);
+    }
+  },
+  created: function() {
+    this.getUserAuth();
+  },
+  watch:{
+    $route() {//(to, from){
+      this.getUserAuth();
     }
   }
 }
@@ -172,21 +194,21 @@ li a:hover:not(.router-link-exact-active) {
     nav > ul > li > a:not(.router-link-exact-active){
     display: none;
   }
-    nav > ul.item-visible > li > a{
+    nav > ul.list-visible > li > a{
     display: inline-grid;
   }
-  nav.item-visible > a{
+  nav.list-visible > a{
     align-self: flex-start;
     padding-top: 0.25em;
   }
-  nav.item-visible > button{
+  nav.list-visible > button{
     align-self: flex-start;
     padding-top: 0.333em;
   }
-    nav > ul.item-visible > li:first-child {
+    nav > ul.list-visible > li:first-child {
     padding-top: 0.25em;
     }
-    nav > ul.item-visible > li:last-child {
+    nav > ul.list-visible > li:last-child {
     padding-bottom: 0.25em;
     }
   nav > button {
@@ -194,5 +216,11 @@ li a:hover:not(.router-link-exact-active) {
   #hamburger {
     visibility: visible;
   }
+}
+#navbarUL > li.item-visible {
+  display: none;
+}
+#navbarUL > li:not(.item-visible) {
+  display: inline-grid;
 }
 </style>

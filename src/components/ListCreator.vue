@@ -3,8 +3,8 @@
     <h1>List Creator - select seed artists for your playlis</h1>
     <div id="ButtonGroup">
       <button @click="getTopArtists">Add top artists</button>
-      <button @click="getPlaylistArtists">Add playlist artists</button>
-      <button @click="clearSWL">Clear seed-weight-list</button>
+      <button @click="getPlaylistArtists">Add artists from playlist</button>
+      <button @click="clearSWL">Clear artists</button>
       <button @click="postSWL">Post artists</button>
     </div>
     <ArtistList v-bind:artistList="artistList"></ArtistList>
@@ -27,7 +27,9 @@ export default {
   },
   methods: {
     async getSWL() {
-      const data = await fetch(`${BACKEND_URL}/api/list/seed-weight-list`);
+      const data = await fetch(`${BACKEND_URL}/api/list/seed-weight-list`,{
+        credentials:"include"
+      });
       this.artistList = await data.json();
       //console.log(this.artistList);
     },
@@ -50,7 +52,9 @@ export default {
         }
       }
       if (sel !== ''){
-        const data = await fetch(`${BACKEND_URL}/api/sptfy/get-playlist-artists?playlist_id=${sel}`);
+        const data = await fetch(`${BACKEND_URL}/api/sptfy/get-playlist-artists?playlist_id=${sel}`,{
+            credentials:"include"
+        });
         this.artistList = this.artistList.concat(await data.json());
         alert("added playlist artists to seed-weight-list");
         //console.log(this.artistList);
@@ -72,7 +76,9 @@ export default {
           sel = "medium_term";
           break;
       }
-      const data = await fetch(`${BACKEND_URL}/api/sptfy/get-top-artists?term=${sel}`);
+      const data = await fetch(`${BACKEND_URL}/api/sptfy/get-top-artists?term=${sel}`,{
+          credentials:"include"
+      });
       this.artistList = this.artistList.concat(await data.json());
       alert("added top artists to seed-weight-list");
       //console.log(this.artistList);
@@ -81,6 +87,7 @@ export default {
       const data = await fetch(`${BACKEND_URL}/api/list/seed-weight-list`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials:"include",
         body: JSON.stringify(this.artistList)
       });
       //console.log(data);

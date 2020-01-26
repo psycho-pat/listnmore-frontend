@@ -1,5 +1,5 @@
 <template>
-    <div class="login">
+    <div class="login" id="login">
         <h1>Login</h1>
         <form id="login_form" action="http://127.0.0.1:5000/api/user/login" method="POST">
             <input type="text" name="name" placeholder="Username" required>
@@ -11,6 +11,9 @@
 <script>
 </script>
 <style>
+    #login{
+        text-align: center;
+    }
     #login_form{
         display:inline-flex;
         flex-direction: column;

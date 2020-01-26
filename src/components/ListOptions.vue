@@ -52,12 +52,18 @@ const BACKEND_URL = "http://127.0.0.1:5000";
   }
 </script>
 <style>
+#ListOptions{
+  text-align: center;
+}
 #ListOptionForm {
   display: inline-flex;
   flex-direction: column;
+  align-items: center;
+}
+#ListOptionForm > input {
+  margin-bottom: 0.5em;
 }
     #ListOptionForm > button {
-        margin-top:0.5em;
         border: none;
         background-color: black;
         color: white;
