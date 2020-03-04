@@ -1,7 +1,7 @@
 <template>
     <div class="register" id="register">
         <h1>Register</h1>
-        <form id="register_form" action="http://127.0.0.1:5000/api/user/register" method="POST"> 
+        <form id="register_form" action="/api/user/register" method="POST"> 
             <input type="text" name="name" placeholder="Username" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Register</button>

@@ -23,7 +23,8 @@
 import Logo from '@/components/Logo.vue'
 
 document.title = "Listnnmore";
-const BACKEND_URL = "http://127.0.0.1:5000";
+//const BACKEND_URL = "http://127.0.0.1:5000";
+const BACKEND_URL = "";
 export default {
   name: 'app',
   components: {

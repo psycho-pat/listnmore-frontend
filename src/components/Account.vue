@@ -7,7 +7,7 @@
         <br>
         <div id="account_spotify">
             <h1>Spotify access: {{ spotify_message }}</h1>
-            <a href="http://127.0.0.1:5000/api/sptfy/authorize"><button>Authorize Spotify Access</button></a>
+            <a href="/api/sptfy/authorize"><button>Authorize Spotify Access</button></a>
         </div>
         <h1>User Playlists:</h1>
         <div>
@@ -22,7 +22,8 @@
     </div>
 </template>
 <script>
-    const BACKEND_URL = "http://127.0.0.1:5000";
+    //const BACKEND_URL = "http://127.0.0.1:5000";
+    const BACKEND_URL = "";
     export default {
         props : ["nextUrl"],
         data(){
