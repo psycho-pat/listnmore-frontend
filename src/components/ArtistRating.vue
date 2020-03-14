@@ -11,6 +11,9 @@
       </label>
     </form>
     <star-rating
+      active-color="#4CAF50"
+      border-color="#000000"
+      rounded-corners="true"
       @rating-selected="setRating"
       :rating="value.rating"
       :show-rating="false"
