@@ -88,13 +88,14 @@
 
             },
             async renewPlaylist(index) {
+                alert("Have some patience this will take a few seconds...");
                 const data = await fetch(`${BACKEND_URL}/api/list/renewPlaylist?index=` + index,{
                     credentials:"include"
                 });
                 //console.log(data);
-                alert("Have some patience this will take a few seconds...");
                 await data;
                 alert("done!");
+                this.getUserInfo();
             }
         },
         created: function(){

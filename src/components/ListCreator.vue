@@ -53,12 +53,11 @@ export default {
         }
       }
       if (sel !== ''){
-        alert("Have some patience this will take a few seconds...");
         const data = await fetch(`${BACKEND_URL}/api/sptfy/get-playlist-artists?playlist_id=${sel}`,{
             credentials:"include"
         });
         this.artistList = this.artistList.concat(await data.json());
-        alert("done!"); //added playlist artists to seed-weight-list
+        alert("added playlist artists to seed-weight-list");
         //console.log(this.artistList);
       }
     },
@@ -86,6 +85,7 @@ export default {
       //console.log(this.artistList);
     },
     async postSWL() {
+      alert("Have some patience this will take a few seconds...");
       const data = await fetch(`${BACKEND_URL}/api/list/seed-weight-list`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -94,7 +94,7 @@ export default {
       });
       //console.log(data);
       await data;
-      alert("seed-weight-list has been saved");
+      alert("done!");
     }
   },
   created: function(){
