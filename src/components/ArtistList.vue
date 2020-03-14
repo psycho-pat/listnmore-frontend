@@ -87,9 +87,11 @@ export default {
     display:grid;
     grid-template-columns: 16em 5em;
     margin-bottom: 0.5em;
-    padding-left:0.5em;
-    padding-right:0.5em;
+    padding:0.3em;
     width:fit-content;
+  }
+  #ArtistList ul > li > select{
+    border-radius: 5px;
   }
   #ArtistList ul > li > p {
     margin:0;
