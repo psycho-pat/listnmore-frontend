@@ -7,14 +7,14 @@
         <br>
         <div id="account_spotify">
             <h1>Spotify access: {{ spotify_message }}</h1>
-            <a href="/api/sptfy/authorize"><button>Authorize Spotify Access</button></a>
+            <a :class="{'item-visible':!userAuth}" href="/api/sptfy/authorize"><button>Authorize Spotify Access</button></a>
         </div>
         <h1>User Playlists:</h1>
         <div>
             <ul id="playlists">
                 <div v-for="(list, index) in user_playlists" v-bind:key="index">
                     <li>
-                        {{list}} <button @click="renewPlaylist(index)">Renew NOW</button>
+                        {{list.name}} - last renewed: {{list.lastRenewDate}} <button @click="renewPlaylist(index)">Renew NOW</button>
                     </li>
                 </div>
             </ul>
@@ -31,7 +31,8 @@
                 name : "username",
                 spotify_status: false,
                 spotify_message: "not authorized",
-                user_playlists: [] //['foo','bar']
+                user_playlists: [], //[{name: "bla", lastRenewDate: "yesterday"}],//Array, //['foo','bar']
+                userAuth:false
             }
         },
         methods : {
@@ -60,9 +61,11 @@
                 this.user_playlists = json.playlists;
                 if (json.spotify_auth == true){
                     this.spotify_message = "authorized";
+                    this.userAuth = true;
                 }
                 else{
                     this.spotify_message = "not authorized";
+                    this.userAuth = false;
                 }
                 //console.log(this.name);
             },
@@ -89,8 +92,9 @@
                     credentials:"include"
                 });
                 //console.log(data);
-                await data;
                 alert("Have some patience this will take a few seconds...");
+                await data;
+                alert("done!");
             }
         },
         created: function(){
@@ -142,5 +146,8 @@
     flex-direction: column;
     list-style-type: none;
     margin: 0;
+}
+#account_spotify > a:not(.item-visible) {
+    display: none;
 }
 </style>

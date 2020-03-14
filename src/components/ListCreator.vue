@@ -53,11 +53,12 @@ export default {
         }
       }
       if (sel !== ''){
+        alert("Have some patience this will take a few seconds...");
         const data = await fetch(`${BACKEND_URL}/api/sptfy/get-playlist-artists?playlist_id=${sel}`,{
             credentials:"include"
         });
         this.artistList = this.artistList.concat(await data.json());
-        alert("added playlist artists to seed-weight-list");
+        alert("done!"); //added playlist artists to seed-weight-list
         //console.log(this.artistList);
       }
     },
